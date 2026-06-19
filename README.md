@@ -1,8 +1,9 @@
-## Make your computer tablet into an Ereader
+## Make your tablet PC into an Ereader
+Here's how to repurpose an old tablet PC into an Ereader
 
 ### 0. If your device's UEFI firmware is 32-bit (As my DELL venue 8 pro does)
 After creating a bootable USB (Prefferably using **rufus**):
-- Download the 'bootia32.efi' from this repository.
+- Download the 'bootia32.efi' from this repository. Or look up how to create on on your own (Not too difficult).
 - Put the 'bootia32.efi' file into the boot drive's folder:
 ```bash
 /EFI/BOOT/

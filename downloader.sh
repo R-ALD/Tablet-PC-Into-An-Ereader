@@ -54,9 +54,7 @@ xset s off
 xset s noblank
 
 # Auto-detect current X screen size.
-# Example xrandr line:
-# Screen 0: minimum 320 x 200, current 1920 x 1200, maximum ...
-SCREEN_SIZE="$(xrandr | awk '/^Screen 0:/ {print $8 "x" $10; exit}')"
+SCREEN_SIZE="$(xrandr | sed -nE 's/^Screen 0:.* current ([0-9]+) x ([0-9]+),.*/\1x\2/p')"
 
 SCREEN_W="${SCREEN_SIZE%x*}"
 SCREEN_H="${SCREEN_SIZE#*x}"

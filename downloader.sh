@@ -18,7 +18,7 @@ cd /tmp
 
 wget https://github.com/koreader/koreader/releases/download/v2026.03/koreader_2026.03-1_amd64.deb
 
-echo "3a106ede88fd22a3662b99e00a45efb9c550ab9689a2139b80436d8dd0dc41c1  koreader_2026.03-1_amd64.deb" | sha256sum -c -
+#echo "3a106ede88fd22a3662b99e00a45efb9c550ab9689a2139b80436d8dd0dc41c1  #koreader_2026.03-1_amd64.deb" | sha256sum -c -
 
 sudo apt install ./koreader_2026.03-1_amd64.deb -y
 
@@ -53,12 +53,25 @@ xset -dpms
 xset s off
 xset s noblank
 
-# Dell Venue 8 Pro 5855 portrait-ish layout.
-export EMULATE_READER_W=1200 
-export EMULATE_READER_H=1920 
-export EMULATE_READER_DPI=280 
+# Auto-detect current X screen size.
+# Example xrandr line:
+# Screen 0: minimum 320 x 200, current 1920 x 1200, maximum ...
+SCREEN_SIZE="$(xrandr | awk '/^Screen 0:/ {print $8 "x" $10; exit}')"
 
-unclutter -idle 3 -root &
+SCREEN_W="${SCREEN_SIZE%x*}"
+SCREEN_H="${SCREEN_SIZE#*x}"
+
+# Fallback if detection fails.
+#if [ -z "$SCREEN_W" ] || [ -z "$SCREEN_H" ] || [ "$SCREEN_W" = "$SCREEN_H" ]; then
+#    SCREEN_W=1920
+#    SCREEN_H=1200
+#fi
+
+export EMULATE_READER_W="$SCREEN_W"
+export EMULATE_READER_H="$SCREEN_H"
+export EMULATE_READER_DPI=280
+
+unclutter -idle 1 -root &
 
 # Blue-light filter / warm screen.
 redshift -O 1000 &

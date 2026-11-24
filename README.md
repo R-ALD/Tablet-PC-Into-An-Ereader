@@ -13,7 +13,7 @@ Here's how to repurpose an old tablet PC into an Ereader
 
 ### 0. If your device's UEFI firmware is 32-bit (As my DELL venue 8 pro's was)
 After creating a, Debian 13, bootable USB-drive (prefferably using **rufus**):
-- Download the `bootia32.efi` from this repository. Or look up how to create on on your own (Not too difficult).
+- Download the `bootia32.efi` from this repository. Or look up how to create one on your own (Not too difficult).
 - Put the `bootia32.efi` file into the boot drive's EFI folder:
 ```bash
 /EFI/BOOT/
